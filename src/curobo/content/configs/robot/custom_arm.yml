@@ -1,0 +1,63 @@
+robot_cfg:
+  kinematics:
+    usd_path: "robot/custom_arm_description/custom_arm/custom_arm.usd"
+    usd_robot_root: "/robot"
+    isaac_usd_path: ""
+    usd_flip_joints: {}
+    usd_flip_joint_limits: []
+
+    urdf_path: "robot/custom_arm_description/custom_arm.urdf"
+    asset_root_path: "robot/custom_arm_description"
+    
+    base_link: "base_link"
+    ee_link: "gripper_link"
+    link_names: null
+    lock_joints: null
+    extra_links: null
+
+    
+    collision_link_names:
+      [
+        "shoulder_link",
+        "upper_arm_link",
+        "elbow_link",
+        "lower_arm_link",
+        "wrist_link",
+        "gripper_link",
+        "finger_link"
+      ] # List[str]
+    collision_spheres: "spheres/custom_arm.yml" #
+    collision_sphere_buffer: 0.005 # float or Dict[str, float]
+    extra_collision_spheres: {}
+    self_collision_ignore:
+      {
+        "shoulder_link": ["upper_arm_link"],
+        "upper_arm_link": ["elbow_link"],
+        "elbow_link": ["lower_arm_link"],
+        "lower_arm_link": ["wrist_link"],
+        "wrist_link": ["gripper_link", "finger_link"],
+        "gripper_link": ["finger_link"],
+      } # Dict[str, List[str]]
+    self_collision_buffer: {} # Dict[str, float]
+
+    use_global_cumul: True
+    mesh_link_names:
+      [
+        "base_link",
+        "shoulder_link",
+        "upper_arm_link",
+        "elbow_link",
+        "lower_arm_link",
+        "wrist_link",
+        "gripper_link",
+        "finger_link"
+      ] # List[str]
+    external_asset_path: null # Use this to add path for externally located assets/robot folder.
+
+    cspace:
+      joint_names: ["soulder_joint", "upper_arm_joint", "elbow_joint", "lower_arm_joint", "wrist_joint", "gripper_joint", "finger_joint"] # List[str]
+      retract_config: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0] # List[float]
+      null_space_weight: [1,1,1,1,1,1,1] # List[str]
+      cspace_distance_weight: [1,1,1,1,1,1,1] # List[str]
+      max_jerk: 500.0
+      max_acceleration: 15.0
